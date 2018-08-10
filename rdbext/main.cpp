@@ -51,7 +51,7 @@ int _tmain(int argc, wchar_t* argv[])
     }
 
     input_file = argv[1];
-    memcpy(output_path, input_file, wcslen(input_file));
+    memcpy(output_path, input_file, wcslen(input_file)*sizeof(wchar_t));
     for (int i=wcslen(output_path)-1; i>0; i--)
     {
         if (output_path[i] == L'.')
@@ -60,11 +60,6 @@ int _tmain(int argc, wchar_t* argv[])
             output_path[i+1] = 0;
             break;
         }
-    }
-
-    if (_waccess(output_path, 0))
-    {
-        _wrmdir(output_path);
     }
 
     fp = _wfopen(input_file, L"rb");
